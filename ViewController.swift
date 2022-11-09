@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
+    // variables
     @IBOutlet weak var txtPlayerName1: UITextField!
     @IBOutlet weak var txtPlayerName2: UITextField!
     @IBOutlet weak var lblError: UILabel!

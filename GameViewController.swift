@@ -37,11 +37,9 @@ class GameViewController: UIViewController {
             
             if (game.currentPlayer == 1) {
                 sender.setImage(UIImage(named: "cross"), for: UIControl.State())
-                
                 game.currentPlayer = 2
             }else{
                 sender.setImage(UIImage(named: "circle"), for: UIControl.State())
-                
                 game.currentPlayer = 1
             }
         }
@@ -60,15 +58,15 @@ class GameViewController: UIViewController {
                 
                 btnPlayAgain.isHidden = false
                 lblResult.isHidden = false
-                dispatcher()
+                //dispatcher()
             }
         }
         
         game.gameIsOn = false
         
         // As long there is no combos matched, the game is still on
-        for i in game.state {
-            if i == 0 {
+        for state in game.state {
+            if state == 0 {
                 game.gameIsOn = true
             }
         }
@@ -78,7 +76,7 @@ class GameViewController: UIViewController {
             lblResult.text = "It is a draw!"
             lblResult.isHidden = false
             btnPlayAgain.isHidden = false
-            dispatcher()
+            //dispatcher()
         }
     }
     
@@ -92,18 +90,23 @@ class GameViewController: UIViewController {
         btnPlayAgain.isHidden = true
         lblResult.isHidden = true
         
+        // for loop to set the images to nil to start over the game
+        for buttons in 1...9 {
+            let btn = self.view.viewWithTag(buttons) as! UIButton
+            btn.setImage(UIImage(), for: UIControl.State())
+        }
         
     }
     
-    //Dispatcher to clear the played board after 3 seconds
-    func dispatcher(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            
-            // for loop to set the images to nil to start over the game
-            for i in 1...9 {
-                let btn = self.view.viewWithTag(i) as! UIButton
-                btn.setImage(UIImage(), for: UIControl.State())
-            }
-        }
-    }
+//    //Dispatcher to clear the played board after 3 seconds
+//    func dispatcher(){
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//
+//            // for loop to set the images to nil to start over the game
+//            for buttons in 1...9 {
+//                let btn = self.view.viewWithTag(buttons) as! UIButton
+//                btn.setImage(UIImage(), for: UIControl.State())
+//            }
+//        }
+//    }
 }
